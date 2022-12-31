@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Nike Cactus Sneaker",
+    "uri": "https://images.unsplash.com/photo-1627839406815-36ff5a5688ae?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    "price": 11500,
+    "sizes": [5, 6, 7, 8, 9]
+  },
+  {
+    "name": "Nike Air Zordan",
+    "uri": "https://images.unsplash.com/photo-1609535766154-e47e5aa87789?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80",
+    "price": 21490,
+    "sizes": [5, 6, 8, 9]
+  },
+  {
+    "name": "Nike Orange Jordan Modern",
+    "uri": "https://images.unsplash.com/photo-1533681018184-68bd1d883b97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
+    "price": 43900,
+    "sizes": [5, 6, 7, 9]
+  }
+]

@@ -1,7 +1,15 @@
-# This is Backend/Server for the ShoezStore Website
+## This is Backend/Server for the ShoezStore Website
 
-## Configure .env file by adding following
+#### Configure .env file by adding following
 
-### DATABASE_URL=
+```sh
+DATABASE_URL=""
+PORT=
+```
 
-### PORT=
+#### Then don't forget to run
+
+```sh
+npm run prisma-push
+npm run seed
+```

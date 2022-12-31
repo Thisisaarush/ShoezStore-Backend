@@ -31,6 +31,6 @@ app.use(
 
 // listening on port 4000
 await new Promise<void>((resolve) =>
-  httpServer.listen({ port: PORT }, resolve)
+  httpServer.listen({ port: PORT || 4000 }, resolve)
 );
 console.log(`🚀 Server ready at http://localhost:4000/`);

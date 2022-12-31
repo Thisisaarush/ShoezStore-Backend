@@ -5,13 +5,14 @@
   "main": "./dist/index.js",
   "type": "module",
   "prisma": {
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
     "compile": "tsc",
     "dev": "nodemon ./src/index.ts",
     "start": "npm run compile && node ./dist/index.js",
-    "prisma": "npx prisma db pull --force && prisma generate",
+    "prisma-pull": "npx prisma db pull --force && prisma generate",
+    "prisma-push": "npx prisma db push",
     "seed": "npx prisma db seed"
   },
   "keywords": [
