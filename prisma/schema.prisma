@@ -7,6 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model categories {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  brand    String
+  category String
+  color    String
+  name     String
+  price    Int
+  sizes    Int[]
+  tag      String
+  uri      String
+}
+
 model herosliders {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name  String

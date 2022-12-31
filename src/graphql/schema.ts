@@ -17,10 +17,21 @@ export const typeDefs = `#graphql
     price: Int
     sizes: [Int]
   }
+  type Category {
+    name: String
+    uri: String
+    price: Int
+    sizes: [Int]
+    category: String
+    color: String
+    tag: String
+    brand: String
+  }
 
   type Query {
     heroSlider: [HeroSlider]
     recommended: [Recommended]
     trending: [Trending]
+    category: [Category]
   }
 `;
