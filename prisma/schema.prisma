@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model herosliders {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  price Int
+  sizes Int[]
+  uri   String
+}
+
+model recommendeds {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  price Int
+  sizes Int[]
+  uri   String
+}
+
+model trendings {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  price Int
+  sizes Int[]
+  uri   String
+}

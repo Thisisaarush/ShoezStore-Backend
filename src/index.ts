@@ -1,39 +1,23 @@
 import express from "express";
+import bodyParser from "express";
+import http from "http";
+import cors from "cors";
+import { PORT } from "./config/env.js";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
-import http from "http";
-import bodyParser from "express";
-import cors from "cors";
-import { typeDefs } from "./graphql/schema/index.js";
-import { resolvers } from "./graphql/resolver/index.js";
-import { connectDB } from "./config/db.js";
-import dotenv from "dotenv";
+import { typeDefs } from "./graphql/schema.js";
+import { resolvers } from "./graphql/resolvers.js";
+import { TApolloServer } from "./types/index.js";
 
-dotenv.config();
-
-interface MyContext {
-  token?: String;
-}
-
-const PORT = process.env.PORT;
 const app = express();
 const httpServer = http.createServer(app);
-const server = new ApolloServer<MyContext>({
+const server = new ApolloServer<TApolloServer>({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
 });
-
 await server.start();
-
-// connection with DB
-try {
-  await connectDB();
-  console.log("🟢 Connection with Database is Successful");
-} catch (e) {
-  console.log("🔴 Not Connected to Database");
-}
 
 // middlewares
 app.use(
