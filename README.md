@@ -2,6 +2,6 @@
 
 ## Configure .env file by adding following
 
-### MONGO_URI=
+### DATABASE_URL=
 
 ### PORT=
