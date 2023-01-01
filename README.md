@@ -4,6 +4,7 @@
 
 ```sh
 DATABASE_URL=""
+JWT_SECRET=
 PORT=
 ```
 

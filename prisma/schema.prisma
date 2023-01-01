@@ -8,37 +8,45 @@ datasource db {
 }
 
 model categories {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
   brand    String
   category String
   color    String
   name     String
-  price    Int
-  sizes    Int[]
+  price    BigInt
+  sizes    BigInt[]
   tag      String
   uri      String
 }
 
 model herosliders {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  price Int
-  sizes Int[]
+  price BigInt
+  sizes BigInt[]
   uri   String
 }
 
 model recommendeds {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  price Int
-  sizes Int[]
+  price BigInt
+  sizes BigInt[]
   uri   String
 }
 
 model trendings {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  price Int
-  sizes Int[]
+  price BigInt
+  sizes BigInt[]
   uri   String
+}
+
+model users {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  name     String
+  password String
+  token    String?
 }

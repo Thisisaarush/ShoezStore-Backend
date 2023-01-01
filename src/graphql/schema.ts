@@ -27,11 +27,29 @@ export const typeDefs = `#graphql
     tag: String
     brand: String
   }
+  type User {
+    name: String    
+    email: String
+    password: String  
+    token: String    
+    success: Boolean
+    message: String
+  }
+
+  input IUser {
+  name: String
+  email: String
+  password: String
+  }
 
   type Query {
     heroSlider: [HeroSlider]
     recommended: [Recommended]
     trending: [Trending]
     category: [Category]
+  }
+
+  type Mutation {
+    registerUser(user: IUser): User
   }
 `;
