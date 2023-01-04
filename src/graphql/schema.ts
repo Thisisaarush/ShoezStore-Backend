@@ -30,7 +30,6 @@ export const typeDefs = `#graphql
   type User {
     name: String    
     email: String
-    password: String  
     token: String    
     success: Boolean
     message: String
@@ -38,6 +37,10 @@ export const typeDefs = `#graphql
 
   input IUser {
   name: String
+  email: String
+  password: String
+  }
+  input IUserLogin {
   email: String
   password: String
   }
@@ -51,5 +54,6 @@ export const typeDefs = `#graphql
 
   type Mutation {
     registerUser(user: IUser): User
+    loginUser(user: IUserLogin): User
   }
 `;
