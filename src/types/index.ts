@@ -1,5 +1,6 @@
 export interface TApolloServer {
-  token?: String;
+  req: Express.Request;
+  res: Express.Response;
 }
 
 export type TUserInput = {

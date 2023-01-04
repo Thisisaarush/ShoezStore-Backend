@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { createJwtToken } from "../utils/jwt.js";
 import { TUserInput, TUserInputLogin } from "../types";
 import { encryptPassword, comparePassword } from "../utils/bcrypt.js";
+import { NODE_ENV } from "../config/env.js";
 
 const prisma = new PrismaClient();
 
@@ -19,7 +20,7 @@ export const resolvers = {
   },
   Mutation: {
     // register user
-    registerUser: async (_, args: TUserInput) => {
+    registerUser: async (_, args: TUserInput, { req, res }) => {
       let { name, email, password } = args.user;
 
       if (!name || !email || !password)
@@ -34,6 +35,11 @@ export const resolvers = {
         await encryptPassword(password).then((hash) => (password = hash));
         await prisma.users.create({
           data: { name, email, password },
+        });
+        res.cookie("token", token, {
+          maxAge: 3 * 24 * 60 * 60 * 1000,
+          httpOnly: true,
+          secure: NODE_ENV === "production",
         });
 
         return {
@@ -53,7 +59,7 @@ export const resolvers = {
     },
 
     // login user
-    loginUser: async (_, args: TUserInputLogin) => {
+    loginUser: async (_, args: TUserInputLogin, { req, res }) => {
       let { email, password } = args.user;
 
       if (!email || !password) {
@@ -69,9 +75,15 @@ export const resolvers = {
         const validUser = await comparePassword(password, user.password);
 
         if (validUser) {
+          res.cookie("token", token, {
+            maxAge: 3 * 24 * 60 * 60 * 1000,
+            httpOnly: true,
+            secure: NODE_ENV === "production",
+          });
+
           return {
             success: true,
-            message: "LogIn Successfull!",
+            message: "Login Successfully!",
             name: user.name,
             email,
             token,
@@ -90,6 +102,18 @@ export const resolvers = {
           message: "User With This Email is not Registered, Please Register!",
         };
       }
+    },
+
+    // logout User
+    logoutUser: async (_, args, { req, res }) => {
+      res.cookie("token", null, {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+      });
+      return {
+        success: true,
+        message: "Logout Successfully",
+      };
     },
   },
 };

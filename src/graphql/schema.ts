@@ -53,7 +53,8 @@ export const typeDefs = `#graphql
   }
 
   type Mutation {
-    registerUser(user: IUser): User
-    loginUser(user: IUserLogin): User
+    registerUser(user: IUser!): User!
+    loginUser(user: IUserLogin!): User!
+    logoutUser: User!
   }
 `;

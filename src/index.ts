@@ -25,7 +25,7 @@ app.use(
   cors<cors.CorsRequest>(),
   bodyParser.json(),
   expressMiddleware(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
+    context: async ({ req, res }) => ({ req, res }),
   })
 );
 
