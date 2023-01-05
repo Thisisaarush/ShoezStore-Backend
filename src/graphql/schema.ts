@@ -36,13 +36,20 @@ export const typeDefs = `#graphql
   }
 
   input IUser {
-  name: String
-  email: String
-  password: String
+  name: String!
+  email: String!
+  password: String!
   }
   input IUserLogin {
-  email: String
-  password: String
+  email: String!
+  password: String!
+  }
+  input IForgotPassword {
+    email: String!
+  }
+  input IResetPassword {
+    newPassword: String!
+    confirmPassword: String!
   }
 
   type Query {
@@ -56,5 +63,7 @@ export const typeDefs = `#graphql
     registerUser(user: IUser!): User!
     loginUser(user: IUserLogin!): User!
     logoutUser: User!
+    forgotPassword(user: IForgotPassword!): User!
+    resetPassword(user: IResetPassword): User!
   }
 `;

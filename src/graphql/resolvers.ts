@@ -2,7 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import { createJwtToken } from "../utils/jwt.js";
 import { TUserInput, TUserInputLogin } from "../types";
 import { encryptPassword, comparePassword } from "../utils/bcrypt.js";
-import { NODE_ENV } from "../config/env.js";
+import { CLIENT_URL, NODE_ENV } from "../config/env.js";
+import { sendResetEmail } from "../utils/sendResetEmail.js";
 
 const prisma = new PrismaClient();
 
@@ -114,6 +115,91 @@ export const resolvers = {
         success: true,
         message: "Logout Successfully",
       };
+    },
+
+    // forgot password
+    forgotPassword: async (_, args, { req }) => {
+      let { email } = args.user;
+
+      if (!email) {
+        return { message: "Please Provide Email" };
+      }
+
+      const user = await prisma.users.findFirst({
+        where: { email },
+      });
+
+      if (user) {
+        const token: string = createJwtToken(email, "3d");
+        const resetUrl = CLIENT_URL + req.path + `${token}`;
+
+        await prisma.users.update({
+          where: { email },
+          data: { token },
+        });
+        try {
+          await sendResetEmail(resetUrl, email);
+        } catch (error) {
+          return {
+            success: false,
+            message: "Server Error",
+          };
+        }
+
+        return {
+          email,
+          success: true,
+          message: "Password Reset Link has been sent to Your Email",
+        };
+      } else {
+        return {
+          email,
+          success: false,
+          message: "User with this Email is not Registered!",
+        };
+      }
+    },
+
+    // reset password
+    resetPassword: async (_, args, { req }) => {
+      let { newPassword, confirmPassword } = args.user;
+      const [path, token] = req.url.split("/");
+
+      if (!token) {
+        return {
+          success: false,
+          message: "Verify Token Missing!",
+        };
+      }
+
+      if (!newPassword || !confirmPassword) {
+        return { message: "Please Provide New Password" };
+      }
+
+      if (newPassword !== confirmPassword) {
+        return { message: "Password do not Match" };
+      }
+
+      const user = await prisma.users.findFirst({ where: { token } });
+
+      if (user) {
+        const newEncryptedPassword = await encryptPassword(newPassword);
+
+        await prisma.users.update({
+          where: { token },
+          data: { password: newEncryptedPassword, token: "" },
+        });
+
+        return {
+          success: true,
+          message: "Password Reset Successfully",
+        };
+      } else {
+        return {
+          success: false,
+          message: "Password Reset Failed",
+        };
+      }
     },
   },
 };

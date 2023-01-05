@@ -6,6 +6,11 @@
 DATABASE_URL=""
 JWT_SECRET=
 PORT=
+
+MAIL_TRAP_HOST=
+MAIL_TRAP_PORT=
+MAIL_TRAP_USER=
+MAIL_TRAP_PASS=
 ```
 
 #### Then don't forget to run
