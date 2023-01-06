@@ -1,6 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import { createJwtToken } from "../utils/jwt.js";
-import { TUserInput, TUserInputLogin } from "../types";
+import {
+  TForgotPassword,
+  TResetPassword,
+  TUserInput,
+  TUserInputLogin,
+} from "../types";
 import { encryptPassword, comparePassword } from "../utils/bcrypt.js";
 import { CLIENT_URL, NODE_ENV } from "../config/env.js";
 import { sendResetEmail } from "../utils/sendResetEmail.js";
@@ -118,7 +123,7 @@ export const resolvers = {
     },
 
     // forgot password
-    forgotPassword: async (_, args, { req }) => {
+    forgotPassword: async (_, args: TForgotPassword, { req }) => {
       let { email } = args.user;
 
       if (!email) {
@@ -161,7 +166,7 @@ export const resolvers = {
     },
 
     // reset password
-    resetPassword: async (_, args, { req }) => {
+    resetPassword: async (_, args: TResetPassword, { req }) => {
       let { newPassword, confirmPassword } = args.user;
       const [path, token] = req.url.split("/");
 

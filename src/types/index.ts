@@ -17,3 +17,16 @@ export type TUserInputLogin = {
     password: string;
   };
 };
+
+export type TForgotPassword = {
+  user: {
+    email: string;
+  };
+};
+
+export type TResetPassword = {
+  user: {
+    newPassword: string;
+    confirmPassword: string;
+  };
+};
