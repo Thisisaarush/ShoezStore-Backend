@@ -13,8 +13,8 @@ model categories {
   category String
   color    String
   name     String
-  price    BigInt
-  sizes    BigInt[]
+  price    Int
+  sizes    Int[]
   tag      String
   uri      String
 }
@@ -22,24 +22,24 @@ model categories {
 model herosliders {
   id    String   @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  price BigInt
-  sizes BigInt[]
+  price Int
+  sizes Int[]
   uri   String
 }
 
 model recommendeds {
   id    String   @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  price BigInt
-  sizes BigInt[]
+  price Int
+  sizes Int[]
   uri   String
 }
 
 model trendings {
   id    String   @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  price BigInt
-  sizes BigInt[]
+  price Int
+  sizes Int[]
   uri   String
 }
 
