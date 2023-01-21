@@ -40,7 +40,7 @@ export const resolvers = {
         const token: string = createJwtToken(email, "3d");
         await encryptPassword(password).then((hash) => (password = hash));
         await prisma.users.create({
-          data: { name, email, password },
+          data: { name, email, password, token },
         });
         res.cookie("token", token, {
           maxAge: 3 * 24 * 60 * 60 * 1000,

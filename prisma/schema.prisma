@@ -48,5 +48,5 @@ model users {
   email    String @unique
   name     String
   password String
-  token    String?
+  token    String @unique
 }

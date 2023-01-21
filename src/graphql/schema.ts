@@ -64,6 +64,6 @@ export const typeDefs = `#graphql
     loginUser(user: IUserLogin!): User!
     logoutUser: User!
     forgotPassword(user: IForgotPassword!): User!
-    resetPassword(user: IResetPassword): User!
+    resetPassword(user: IResetPassword!): User!
   }
 `;
