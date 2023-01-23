@@ -1,23 +1,27 @@
 export const typeDefs = `#graphql
   type HeroSlider {
+    id: String
     name: String
     uri: String
     price: Int
     sizes: [Int]
   }
   type Recommended {
+    id: String
     name: String
     uri: String
     price: Int
     sizes: [Int]
   }
   type Trending {
+    id: String
     name: String
     uri: String
     price: Int
     sizes: [Int]
   }
   type Category {
+    id: String
     name: String
     uri: String
     price: Int
