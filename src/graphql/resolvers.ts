@@ -40,19 +40,16 @@ export const resolvers = {
           where: { email },
           data: { items: cartItems },
         });
-
-        return {
-          email,
-          items: user.items,
-          success: true,
-          message: "Cart items updated successfully",
-        };
       } else {
-        return {
-          success: false,
-          message: "User with this email not found!",
-        };
+        await prisma.userCart.create({
+          data: { email, items: cartItems },
+        });
       }
+      return {
+        email,
+        success: true,
+        message: "Cart items updated successfully",
+      };
     },
 
     // register user
