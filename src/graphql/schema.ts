@@ -38,15 +38,35 @@ export const typeDefs = `#graphql
     success: Boolean
     message: String
   }
+  type CartItems {
+    itemId: String
+    itemSize: Int
+    numberOfItems: Int
+  }
+  type UserCart {
+    email: String
+    items: [CartItems]
+    success: Boolean
+    message: String
+  }
 
+  input ICartItems {
+    itemId: String
+    itemSize: Int
+    numberOfItems: Int
+  }
+  input IUserCartItems {
+    email: String
+    cartItems: [ICartItems]
+  }
   input IUser {
-  name: String!
-  email: String!
-  password: String!
+    name: String!
+    email: String!
+    password: String!
   }
   input IUserLogin {
-  email: String!
-  password: String!
+    email: String!
+    password: String!
   }
   input IForgotPassword {
     email: String!
@@ -61,6 +81,7 @@ export const typeDefs = `#graphql
     recommended: [Recommended]
     trending: [Trending]
     category: [Category]
+    cartItems: [UserCart]
   }
 
   type Mutation {
@@ -69,5 +90,6 @@ export const typeDefs = `#graphql
     logoutUser: User!
     forgotPassword(user: IForgotPassword!): User!
     resetPassword(user: IResetPassword!): User!
+    updateUserCartItems(user: IUserCartItems!): UserCart!
   }
 `;

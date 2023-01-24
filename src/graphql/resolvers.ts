@@ -5,6 +5,8 @@ import {
   TResetPassword,
   TUserInput,
   TUserInputLogin,
+  TUpdateCartItems,
+  UserCartItem,
 } from "../types";
 import { encryptPassword, comparePassword } from "../utils/bcrypt.js";
 import { CLIENT_URL, NODE_ENV } from "../config/env.js";
@@ -16,6 +18,7 @@ const heroSliderData = await prisma.herosliders.findMany();
 const recommendedData = await prisma.recommendeds.findMany();
 const trendingData = await prisma.trendings.findMany();
 const categoryData = await prisma.categories.findMany();
+const cartItemsData = await prisma.userCart.findMany();
 
 export const resolvers = {
   Query: {
@@ -23,8 +26,35 @@ export const resolvers = {
     recommended: () => recommendedData,
     trending: () => trendingData,
     category: () => categoryData,
+    cartItems: () => cartItemsData,
   },
   Mutation: {
+    // update user cart items
+    updateUserCartItems: async (_, args: TUpdateCartItems) => {
+      let { email, cartItems } = args.user;
+
+      const user = await prisma.userCart.findFirst({ where: { email } });
+
+      if (user) {
+        await prisma.userCart.update({
+          where: { email },
+          data: { items: cartItems },
+        });
+
+        return {
+          email,
+          items: user.items,
+          success: true,
+          message: "Cart items updated successfully",
+        };
+      } else {
+        return {
+          success: false,
+          message: "User with this email not found!",
+        };
+      }
+    },
+
     // register user
     registerUser: async (_, args: TUserInput, { req, res }) => {
       let { name, email, password } = args.user;

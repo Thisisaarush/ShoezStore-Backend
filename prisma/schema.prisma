@@ -50,3 +50,14 @@ model users {
   password String
   token    String @unique
 }
+
+type UserCartItems {
+  itemId   String
+  itemSize Int
+  numberOfItems Int
+}
+model userCart {
+  id    String          @id @default(auto()) @map("_id") @db.ObjectId
+  email String          @unique
+  items UserCartItems[]
+}

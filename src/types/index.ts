@@ -1,3 +1,8 @@
+export type UserCartItem = {
+  itemId: string;
+  itemSize: number;
+  numberOfItems: number;
+};
 export interface TApolloServer {
   req: Express.Request;
   res: Express.Response;
@@ -28,5 +33,12 @@ export type TResetPassword = {
   user: {
     newPassword: string;
     confirmPassword: string;
+  };
+};
+
+export type TUpdateCartItems = {
+  user: {
+    email: string;
+    cartItems: UserCartItem[];
   };
 };

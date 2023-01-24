@@ -1,6 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+//seed data for local mongodb
 
-//seed data
+import { PrismaClient } from "@prisma/client";
 import {
   HeroSlider,
   Recommended,
