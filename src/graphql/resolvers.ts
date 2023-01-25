@@ -33,18 +33,11 @@ export const resolvers = {
     updateUserCartItems: async (_, args: TUpdateCartItems) => {
       let { email, cartItems } = args.user;
 
-      const user = await prisma.userCart.findFirst({ where: { email } });
-
-      if (user) {
-        await prisma.userCart.update({
-          where: { email },
-          data: { items: cartItems },
-        });
-      } else {
-        await prisma.userCart.create({
-          data: { email, items: cartItems },
-        });
-      }
+      await prisma.userCart.upsert({
+        where: { email },
+        update: { items: cartItems },
+        create: { email, items: cartItems },
+      });
       return {
         email,
         success: true,
