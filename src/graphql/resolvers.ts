@@ -6,7 +6,6 @@ import {
   TUserInput,
   TUserInputLogin,
   TUpdateCartItems,
-  UserCartItem,
 } from "../types";
 import { encryptPassword, comparePassword } from "../utils/bcrypt.js";
 import { CLIENT_URL, NODE_ENV } from "../config/env.js";
