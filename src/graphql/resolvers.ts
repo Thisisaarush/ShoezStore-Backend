@@ -13,11 +13,26 @@ import { sendResetEmail } from "../utils/sendResetEmail.js";
 
 const prisma = new PrismaClient();
 
-const heroSliderData = await prisma.herosliders.findMany();
-const recommendedData = await prisma.recommendeds.findMany();
-const trendingData = await prisma.trendings.findMany();
-const categoryData = await prisma.categories.findMany();
-const cartItemsData = await prisma.userCart.findMany();
+async function main() {
+  await prisma.$connect();
+
+  const heroSliderData = await prisma.herosliders.findMany();
+  const recommendedData = await prisma.recommendeds.findMany();
+  const trendingData = await prisma.trendings.findMany();
+  const categoryData = await prisma.categories.findMany();
+
+  return {
+    heroSliderData,
+    recommendedData,
+    trendingData,
+    categoryData,
+  };
+}
+
+const { heroSliderData, recommendedData, trendingData, categoryData } =
+  await main();
+
+await prisma.$disconnect();
 
 export const resolvers = {
   Query: {
@@ -25,7 +40,7 @@ export const resolvers = {
     recommended: () => recommendedData,
     trending: () => trendingData,
     category: () => categoryData,
-    cartItems: () => cartItemsData,
+    cartItems: () => prisma.userCart.findMany(), // not awaiting this request because await will not return updated cart items
   },
   Mutation: {
     // update user cart items
