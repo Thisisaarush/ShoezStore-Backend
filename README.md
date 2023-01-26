@@ -15,6 +15,7 @@ MAIL_TRAP_PASS=
 CLIENT_URL=
 ```
 
+
 #### Then don't forget to run
 
 ```sh
