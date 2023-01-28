@@ -6,10 +6,12 @@ import {
   TUserInput,
   TUserInputLogin,
   TUpdateCartItems,
+  TAmount,
 } from "../types";
 import { encryptPassword, comparePassword } from "../utils/bcrypt.js";
 import { CLIENT_URL, NODE_ENV } from "../config/env.js";
 import { sendResetEmail } from "../utils/sendResetEmail.js";
+import { razorpayInstance } from "../utils/razorPay.js";
 
 const prisma = new PrismaClient();
 
@@ -43,6 +45,29 @@ export const resolvers = {
     cartItems: () => prisma.userCart.findMany(), // not awaiting this request because await will not return updated cart items
   },
   Mutation: {
+    // create razorpay order id
+    createRazorpayOrderId: async (_, args: TAmount) => {
+      const { amount } = args?.order;
+
+      if (!amount)
+        return {
+          message: "Please send amount to generate orderId",
+          success: false,
+        };
+
+      const options = {
+        amount,
+        currency: "INR",
+      };
+
+      const order = await razorpayInstance.orders.create(options);
+      return {
+        orderId: order?.id,
+        success: true,
+        message: "OrderId successfully generated",
+      };
+    }, 
+
     // update user cart items
     updateUserCartItems: async (_, args: TUpdateCartItems) => {
       let { email, cartItems } = args.user;

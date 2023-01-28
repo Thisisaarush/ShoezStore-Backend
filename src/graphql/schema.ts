@@ -49,6 +49,11 @@ export const typeDefs = `#graphql
     success: Boolean
     message: String
   }
+  type OrderId {
+    orderId: String
+    success: Boolean
+    message: String
+  }
 
   input ICartItems {
     itemId: String
@@ -75,6 +80,9 @@ export const typeDefs = `#graphql
     newPassword: String!
     confirmPassword: String!
   }
+  input IOrder {
+    amount: Int!
+  }
 
   type Query {
     heroSlider: [HeroSlider]
@@ -91,5 +99,6 @@ export const typeDefs = `#graphql
     forgotPassword(user: IForgotPassword!): User!
     resetPassword(user: IResetPassword!): User!
     updateUserCartItems(user: IUserCartItems!): UserCart!
+    createRazorpayOrderId(order: IOrder): OrderId!
   }
 `;

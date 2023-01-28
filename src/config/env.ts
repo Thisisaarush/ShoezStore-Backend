@@ -11,3 +11,6 @@ export const MAIL_TRAP_USER = process.env.MAIL_TRAP_USER;
 export const MAIL_TRAP_PASS = process.env.MAIL_TRAP_PASS;
 
 export const CLIENT_URL = process.env.CLIENT_URL;
+
+export const RAZORPAY_ID = process.env.RAZORPAY_ID;
+export const RAZORPAY_SECRET = process.env.RAZORPAY_SECRET;

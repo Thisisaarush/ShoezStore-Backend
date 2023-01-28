@@ -42,3 +42,9 @@ export type TUpdateCartItems = {
     cartItems: UserCartItem[];
   };
 };
+
+export type TAmount = {
+  order: {
+    amount: number;
+  };
+};
