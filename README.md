@@ -13,12 +13,15 @@ MAIL_TRAP_USER=
 MAIL_TRAP_PASS=
 
 CLIENT_URL=
-```
 
+RAZORPAY_ID=
+RAZORPAY_SECRET=
+```
 
 #### Then don't forget to run
 
 ```sh
 npm run prisma-push
 npm run seed
+npm run prisma-gen
 ```
