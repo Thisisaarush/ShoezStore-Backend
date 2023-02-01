@@ -1,4 +1,4 @@
-## (This is Backend/Server for the ShoezStore Website)[https://github.com/Thisisaarush/ShoezStore]
+## This is Backend/Server for the [ShoezStore Website](https://github.com/Thisisaarush/ShoezStore)
 
 #### Configure .env file by adding following
 
