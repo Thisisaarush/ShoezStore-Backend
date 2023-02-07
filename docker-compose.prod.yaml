@@ -1,0 +1,19 @@
+services:
+  server:
+    container_name: shoezstore-server
+    build:
+      context: ./
+      dockerfile: /prod.Dockerfile
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      MAIL_TRAP_HOST: ${MAIL_TRAP_HOST}
+      MAIL_TRAP_PORT: ${MAIL_TRAP_PORT}
+      MAIL_TRAP_USER: ${MAIL_TRAP_USER}
+      MAIL_TRAP_PASS: ${MAIL_TRAP_PASS}
+      CLIENT_URL: ${CLIENT_URL}
+      RAZORPAY_ID: ${RAZORPAY_ID}
+      RAZORPAY_SECRET: ${RAZORPAY_SECRET}
+    ports:
+      - 4000:4000
