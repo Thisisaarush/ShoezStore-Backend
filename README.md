@@ -18,7 +18,7 @@ RAZORPAY_ID=
 RAZORPAY_SECRET=
 ```
 
-#### Then don't forget to run
+#### Then don't forget to run 
 
 ```sh
 npm run prisma-push
