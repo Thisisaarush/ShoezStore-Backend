@@ -1,5 +1,6 @@
 ## This is Backend/Server for the [ShoezStore Frontend](https://github.com/Thisisaarush/ShoezStore)
 
+### Alternate Server hosted on render due to free tier issues on railway - https://shoez-store-backend.onrender.com
 #### Configure .env file by adding following
 
 ```sh
