@@ -16,6 +16,7 @@ const server = new ApolloServer<TApolloServer>({
   typeDefs,
   resolvers,
   plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  introspection: process.env.NODE_ENV !== 'production'
 });
 await server.start();
 
