@@ -1,0 +1,29 @@
+name: Wake up RENDER Server
+on:
+  schedule:
+    - cron: "0 0 * * MON"
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Deploy to Render
+        run: |
+          RENDER_API_KEY=$RENDER_API_KEY
+          RENDER_SERVICE_ID=$RENDER_SERVICE_ID
+
+          render deploy --api-key $RENDER_API_KEY --service $RENDER_SERVICE_ID
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+          
