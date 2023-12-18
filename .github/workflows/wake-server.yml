@@ -17,6 +17,9 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Render API
+        run: npm install api --save
+
       - name: Deploy to Render
         run: |
           RENDER_API_KEY=$RENDER_API_KEY
