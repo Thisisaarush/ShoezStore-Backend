@@ -17,8 +17,8 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Install Render API
-        run: npm install api --save
+      - name: Install Render CLI
+        run: brew install render
 
       - name: Deploy to Render
         run: |
